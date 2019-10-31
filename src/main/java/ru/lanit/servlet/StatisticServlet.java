@@ -12,7 +12,7 @@ import java.io.IOException;
 public class StatisticServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.setAttribute("persons", PersonRepository.getList());
+        request.setAttribute("persons", PersonRepository.getInstance().getList());
         request.getRequestDispatcher("statistic.jsp").forward(request, response);
     }
 }

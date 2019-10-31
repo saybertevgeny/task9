@@ -19,7 +19,7 @@ public class PersonServlet extends HttpServlet {
         boolean existError = false;
         try {
             Person person = PersonMapper.map(request);
-            PersonRepository.save(person);
+            PersonRepository.getInstance().save(person);
         } catch (MappingException e) {
             existError = true;
             request.setAttribute("errorMessage", e.getMessage());

@@ -20,10 +20,10 @@ public class AddressServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         boolean existError = false;
         try {
-            Person person = PersonRepository.getById(Integer.valueOf(request.getParameter("person")));
+            Person person = PersonRepository.getInstance().getById(Integer.valueOf(request.getParameter("person")));
             Address address = AddressMapper.map(request);
             address.setPerson(person);
-            AddressRepository.save(address);
+            AddressRepository.getInstance().save(address);
         } catch (NotFoundEntityException e) {
             existError = true;
             request.setAttribute("errorMessage", "Пользователь не найден");
@@ -40,7 +40,7 @@ public class AddressServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.setAttribute("persons", PersonRepository.getList(false));
+        request.setAttribute("persons", PersonRepository.getInstance().getList(false));
         request.getRequestDispatcher("address.jsp").forward(request, response);
     }
 }
